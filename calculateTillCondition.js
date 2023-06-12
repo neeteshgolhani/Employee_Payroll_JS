@@ -3,6 +3,7 @@ const hourlyWage = 20;
 const partTimeHours = 4;
 const fullTimeHours = 8;
 const workingDaysPerMonth = 20;
+const maxWorkingHours = 160;
 
 // Function to get work hours based on work type
 function getWorkHours(workType) {
@@ -19,8 +20,10 @@ function getWorkHours(workType) {
 // Function to calculate monthly wage
 function calculateMonthlyWage() {
   let totalWage = 0;
+  let totalHours = 0;
+  let workingDays = 0;
 
-  for (let day = 1; day <= workingDaysPerMonth; day++) {
+  while (totalHours < maxWorkingHours && workingDays < workingDaysPerMonth) {
     // Generate a random number to determine the work type
     const random = Math.floor(Math.random() * 3); // Generates a random number between 0 and 2 (inclusive)
 
@@ -32,6 +35,10 @@ function calculateMonthlyWage() {
 
     // Add the daily wage to the total wage
     totalWage += dailyWage;
+
+    // Update the total hours and working days
+    totalHours += workHours;
+    workingDays++;
   }
 
   return totalWage;
@@ -41,5 +48,3 @@ function calculateMonthlyWage() {
 const monthlyWage = calculateMonthlyWage();
 
 console.log("Monthly wage: $" + monthlyWage);
-
-
